@@ -41,7 +41,7 @@ class WorkshopController extends FOSRestController implements ClassResourceInter
      *  output = "Core\EntityBundle\Entity\Workshop",
      *  statusCodes = {
      *      200 = "Returned when successful",
-     *      404 = "Returned when the data is not found"
+     *      204 = "Returned when the data is not found"
      *  }
      * )
      * @return \Symfony\Component\HttpFoundation\Response
@@ -52,7 +52,7 @@ class WorkshopController extends FOSRestController implements ClassResourceInter
         $workshopRepo = $this->getDoctrine()->getManager()->getRepository('CoreEntityBundle:Workshop');
         $workshops = $workshopRepo->getAllActiveWorkshops();
         if (!$workshops) {
-            return $this->handleView($this->view(['code' => 404, 'message' => "No workshop was found"], 404));
+            return $this->handleView($this->view(['code' => 204, 'message' => "No workshop was found"], 204));
         }
         $view = $this->view($workshops, 200);
         return $this->handleView($view);
