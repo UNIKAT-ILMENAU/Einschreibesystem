@@ -34,7 +34,7 @@ module.exports = function (grunt) {
         watch: {
             dev: {
                 files: ['Gruntfile.js', 'web/components/controllers/*.js'],
-                tasks: ['concat:controllers', 'concat:services']
+                tasks: ['concat:controllers', 'concat:services', 'uglify']
             }
         },
         concat: {
