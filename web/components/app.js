@@ -254,7 +254,7 @@ mainApp.config(['$translateProvider', function ($translateProvider) {
         prefix: 'resources/local/lang-',
         suffix: '.json'
     });
-    $translateProvider.preferredLanguage('en');
+    $translateProvider.preferredLanguage('de');
 }]);
 
 /**
