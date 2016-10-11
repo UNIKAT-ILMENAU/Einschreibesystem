@@ -516,8 +516,9 @@ mainAppCtrls.controller('AdminNewWorkshopCtrl', ['$scope', "Workshops", "AdminWo
             var _ea = Date.parse($scope.workshop.end_at);
             var _sa = Date.parse($scope.workshop.start_at);
             $scope.workshop.duration = new Date(_ea - _sa);
+            $scope.workshop.start_at = new Date().setHours(0,0,0,0);
         };
-        $scope.workshop.duration = -3600000;
+        $scope.workshop.duration = new Date(0);
         //Get translations for errors and store in array
         var _translations = {};
         //Pass all required translation IDs to translate service
@@ -550,9 +551,13 @@ mainAppCtrls.controller('AdminNewWorkshopCtrl', ['$scope', "Workshops", "AdminWo
                 str += _date.getSeconds();
                 return str;
             };
-            var _sa = Date.parse($scope.workshop.start_at);
+
+            var _sa = new Date($scope.workshop.start_at);
+            // var _duration = new Date($scope.workshop.duration);
             var _duration = $scope.workshop.duration;
-            var _ea = new Date(_sa + _duration);
+            _duration = Date.UTC(_duration.getFullYear(), _duration.getMonth(), _duration.getDate(), _duration.getHours(), _duration.getMinutes());
+            var _ea = _sa;
+            _ea.setMilliseconds(_sa.getMilliseconds() + _duration);
             var now = new Date();
             var error = false;
             if ($scope.workshop.cost < 0) {
@@ -680,8 +685,11 @@ mainAppCtrls.controller('adminWorkshopDetailsCtrl', ['$scope', 'Workshops', 'Par
 
             var _ea = Date.parse($scope.workshop.end_at);
             var _sa = Date.parse($scope.workshop.start_at);
-            $scope.workshop.duration = new Date(_ea - _sa);
-
+            var _durationInMs = _ea - _sa;
+            // calculate duration in hh:mm
+            var _duration = ("0" + Math.floor(_durationInMs/(1000*60*60))).slice(-2) + ":" +
+                ("0" + Math.floor((_durationInMs%(1000*60*60))/(1000 * 60))).slice(-2);
+            $scope.workshop.duration = _duration;
             $scope.loading = false;
         }, function (httpResponse) {
             $alert({
@@ -933,6 +941,7 @@ mainAppCtrls.controller('adminWorkshopManagementCtrl', ['$scope', 'AdminWorkshop
                             dismissable: false,
                             show: true
                         });
+                        break;
                     case 500:
                         $scope.myAlert = $alert({
                             title: $scope.errorTitle,
@@ -941,7 +950,7 @@ mainAppCtrls.controller('adminWorkshopManagementCtrl', ['$scope', 'AdminWorkshop
                             container: '#alert',
                             dismissable: false,
                             show: true
-                        })
+                        });
                         break;
                 }
                 $scope.loading = false;
@@ -1501,7 +1510,6 @@ mainAppCtrls.controller('EditWorkshopTemplateCtrl', ['$scope', 'WorkshopTemplate
         });
     }
 ]);
-
 var mainAppCtrls = angular.module("mainAppCtrls");
 /**
  * @ngdoc controller
@@ -2574,8 +2582,12 @@ mainAppCtrls.controller('WorkshopDetailsCtrl', ['$scope', 'Workshops', '$statePa
 
             var _ea = Date.parse($scope.workshop.end_at);
             var _sa = Date.parse($scope.workshop.start_at);
+            var _durationInMs = _ea - _sa;
+            // calculate duration in hh:mm
+            var _duration = ("0" + Math.floor(_durationInMs/(1000*60*60))).slice(-2) + ":" +
+                ("0" + Math.floor((_durationInMs%(1000*60*60))/(1000 * 60))).slice(-2);
+            $scope.workshop.duration = _duration;
 
-            $scope.workshop.duration = new Date(_ea - _sa);
             $scope.loading = false;
         }, function (httpResponse) {
             alert(httpResponse.status + '');
@@ -2624,29 +2636,31 @@ mainAppCtrls.controller('WorkshopListCtrl', ['$scope', 'Workshops', '$alert', '$
         //Define object to store the alert in
         $scope.myAlert;
         //Get and store translation for alert title.
-        $translate(['TITLE_ERROR', 'ERROR_NO_WORKSHOPS', 'EMPTY_WORKSHOP', 'ALERT_INTERNAL_SERVER_ERROR']).then(function (translations) {
+        $translate(['TITLE_ERROR', 'ERROR_NO_WORKSHOPS', 'EMPTY_WORKSHOP', 'ALERT_INTERNAL_SERVER_ERROR', 'TITLE_INFO']).then(function (translations) {
             $scope.errorTitle = translations.TITLE_ERROR;
             $scope.errorMsg = translations.ERROR_NO_WORKSHOPS;
-            $scope.InternalServerError = translations.ALERT_INTERNAL_SERVER_ERROR;
             $scope.emptyMsg = translations.EMPTY_WORKSHOP;
+            $scope.InternalServerError = translations.ALERT_INTERNAL_SERVER_ERROR;
+            $scope.infoTitle = translations.TITLE_INFO;
         });
         $scope.loading = true;
         Workshops.getAll().$promise.then(function (value) {
             $scope.workshopList = value;
             $scope.loading = false;
+            // show info, if no workshop found
+            if(value.length == 0) {
+                $scope.myAlert = $alert({
+                    title: $scope.infoTitle,
+                    type: 'info',
+                    content: $scope.errorMsg,
+                    container: '#alert',
+                    dismissable: false,
+                    show: true
+                });
+            }
         }, function (httpResponse) {
             //switch through all possible errors
             switch (httpResponse.status) {
-                case 204:
-                    $scope.myAlert = $alert({
-                        title: $scope.errorTitle,
-                        type: 'danger',
-                        content: $scope.emptyMsg,
-                        container: '#alert',
-                        dismissable: false,
-                        show: true
-                    });
-                    break;
                 //Alert for error 404, no workshops available
                 case 404:
                     $scope.myAlert = $alert({
