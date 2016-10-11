@@ -50,7 +50,7 @@ class WorkshopTemplates
     /**
      * cost of a workshoptemplate
      * @var int
-     * @ORM\Column(name="cost", type="decimal",precision=4, scale=2, nullable=true)
+     * @ORM\Column(name="cost", type="decimal",precision=4, scale=2, nullable=false)
      * @Serializer\Expose
      * @Serializer\SerializedName("cost")
      */

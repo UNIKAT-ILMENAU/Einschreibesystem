@@ -48,7 +48,7 @@ class Workshop
     /**
      * requirements of a workshop
      * @var string
-     * @ORM\Column(name="requirement", type="string", nullable=true)
+     * @ORM\Column(name="requirement", type="string", nullable=false)
      * @Serializer\Expose
      * @Serializer\SerializedName("requirement")
      */

@@ -95,7 +95,7 @@ class WorkshopController extends FOSRestController implements ClassResourceInter
         if ($params["description"] != null) {
             $workshop->setDescription($params["description"]);
         }
-        if ($params["cost"] != null) {
+        if ($params["cost"] !== null) {
             $workshop->setCost($params["cost"]);
         }
         if ($params["requirements"] != null) {
@@ -162,7 +162,7 @@ class WorkshopController extends FOSRestController implements ClassResourceInter
         if ($params["description"] != null) {
             $workshop->setDescription($params["description"]);
         }
-        if ($params["cost"] != null) {
+        if ($params["cost"] !== null) {
             $workshop->setCost($params["cost"]);
         }
         if ($params["requirements"] != null) {
