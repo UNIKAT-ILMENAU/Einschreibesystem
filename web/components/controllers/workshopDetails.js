@@ -162,8 +162,12 @@ mainAppCtrls.controller('WorkshopDetailsCtrl', ['$scope', 'Workshops', '$statePa
 
             var _ea = Date.parse($scope.workshop.end_at);
             var _sa = Date.parse($scope.workshop.start_at);
+            var _durationInMs = _ea - _sa;
+            // calculate duration in hh:mm
+            var _duration = ("0" + Math.floor(_durationInMs/(1000*60*60))).slice(-2) + ":" +
+                ("0" + Math.floor((_durationInMs%(1000*60*60))/(1000 * 60))).slice(-2);
+            $scope.workshop.duration = _duration;
 
-            $scope.workshop.duration = new Date(_ea - _sa);
             $scope.loading = false;
         }, function (httpResponse) {
             alert(httpResponse.status + '');

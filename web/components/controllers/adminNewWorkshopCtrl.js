@@ -24,8 +24,9 @@ mainAppCtrls.controller('AdminNewWorkshopCtrl', ['$scope', "Workshops", "AdminWo
             var _ea = Date.parse($scope.workshop.end_at);
             var _sa = Date.parse($scope.workshop.start_at);
             $scope.workshop.duration = new Date(_ea - _sa);
+            $scope.workshop.start_at = new Date().setHours(0,0,0,0);
         };
-        $scope.workshop.duration = -3600000;
+        $scope.workshop.duration = new Date(0);
         //Get translations for errors and store in array
         var _translations = {};
         //Pass all required translation IDs to translate service
@@ -58,9 +59,13 @@ mainAppCtrls.controller('AdminNewWorkshopCtrl', ['$scope', "Workshops", "AdminWo
                 str += _date.getSeconds();
                 return str;
             };
-            var _sa = Date.parse($scope.workshop.start_at);
+
+            var _sa = new Date($scope.workshop.start_at);
+            // var _duration = new Date($scope.workshop.duration);
             var _duration = $scope.workshop.duration;
-            var _ea = new Date(_sa + _duration);
+            _duration = Date.UTC(_duration.getFullYear(), _duration.getMonth(), _duration.getDate(), _duration.getHours(), _duration.getMinutes());
+            var _ea = _sa;
+            _ea.setMilliseconds(_sa.getMilliseconds() + _duration);
             var now = new Date();
             var error = false;
             if ($scope.workshop.cost < 0) {
