@@ -1557,7 +1557,7 @@ mainAppCtrls.controller('EnrollmentConfirmCtrl', ['$scope', 'Workshops', '$state
                             dismissable: false,
                             show: true,
                             title: _translations.TITLE_SUCCESS,
-                            content: _translations.ALERT_SUCCESSFULLY_ENROLLED_WORKSHOP + '\"' + $scope.workshop.title + '\"',
+                            content: _translations.ALERT_SUCCESSFULLY_ENROLLED_WORKSHOP + ' \"' + $scope.workshop.title + '\"',
                             type: 'success'
                         });
                         break;
@@ -1567,7 +1567,7 @@ mainAppCtrls.controller('EnrollmentConfirmCtrl', ['$scope', 'Workshops', '$state
                             dismissable: false,
                             show: true,
                             title: _translations.TITLE_SUCCESS,
-                            content: value.message + '\"' + $scope.workshop.title + '\"',
+                            content: value.message + ' \"' + $scope.workshop.title + '\"',
                             type: 'success'
                         });
                         break;
@@ -2434,7 +2434,7 @@ mainAppCtrls.controller('WorkshopDetailsCtrl', ['$scope', 'Workshops', '$statePa
         //Get translations for errors and store in array
         var _translations = {};
         //Pass all required translation IDs to translate service
-        $translate(['ALERT_ENROLLMENT_SUCCESSFULL', 'ALERT_NO_PARTICIPANTS', 'FIRST_NAME', 'LAST_NAME', 'EMAIL'
+        $translate(['ALERT_ENROLLMENT_SUCCESSFUL', 'ALERT_NO_PARTICIPANTS', 'FIRST_NAME', 'LAST_NAME', 'EMAIL'
             , 'ALERT_INTERNAL_SERVER_ERROR', 'ALERT_ALREADY_ENROLLED', 'TITLE_SUCCESS', 'TITLE_ERROR', 'ALERT_YOU_ARE_ON_BLACKLIST', 'ERROR_UNSUBSCRIBE_FAIL',
             'UNSUBSCRIBE_SUCCESS']).
             then(function (translations) {
@@ -2476,7 +2476,7 @@ mainAppCtrls.controller('WorkshopDetailsCtrl', ['$scope', 'Workshops', '$statePa
                 $alert({
                     title: _translations.TITLE_SUCCESS,
                     type: 'success',
-                    content: _translations.ALERT_ENROLLMENT_SUCCESSFULL,
+                    content: _translations.ALERT_ENROLLMENT_SUCCESSFUL,
                     container: '#alertEnroll',
                     dismissable: true,
                     duration: 20,

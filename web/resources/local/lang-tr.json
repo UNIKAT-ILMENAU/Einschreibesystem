@@ -157,7 +157,7 @@
     "ALERT_NOT_FOUND_WORKSHOP": "Yazılmak istedigin Kurs bulunamadı.",
     "ALERT_SUCCESSFULLY_ENROLLED_WORKSHOP": "Kursa başarılı yazıldınız",
     "ALERT_INVALID_ENROLMENT_LINK": "Geçersiz Kayıtlinki. Eger bu linki E-Mail ile aldıiseniz bir Yönetici ile iletişim kurun.",
-    "ALERT_ENROLLMENT_SUCCSESSFULL": "Yazılım başarılı. Lütfen E-Mailinizi kontrol edin!",
+    "ALERT_ENROLLMENT_SUCCESSFUL": "Yazılım başarılı. Lütfen E-Mailinizi kontrol edin!",
     "ALERT_NEGATIVE_COST": "negativ Ücret",
     "ALERT_NEGATIVE_PARTICIPANTS": "negativ Katılımcı",
     "ALERT_WORKSHOP_IN_PAST": "Kurs geçmişte kaldı",

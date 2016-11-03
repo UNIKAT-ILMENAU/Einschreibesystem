@@ -158,7 +158,7 @@
     "ALERT_NOT_FOUND_WORKSHOP": "Workshop, zu dem du dich einschreiben wolltest, konnte nicht gefunden werden.",
     "ALERT_SUCCESSFULLY_ENROLLED_WORKSHOP": "Erfolgreich eingeschrieben für Workshop",
     "ALERT_INVALID_ENROLMENT_LINK": "Ungültiger Anmeldelink. Wenn Sie diesen Link per E-Mail erhalten haben, wenden Sie sich bitte an einen Administrator.",
-    "ALERT_ENROLLMENT_SUCCSESSFULL": "Einschreibung erfolgreich. Bitte überprüfe deine E-Mails!",
+    "ALERT_ENROLLMENT_SUCCESSFUL": "Einschreibung erfolgreich. Bitte überprüfe deine E-Mails!",
     "ALERT_NEGATIVE_COST": "negative Kosten",
     "ALERT_NEGATIVE_PARTICIPANTS": "negativer Teilnehmer",
     "ALERT_WORKSHOP_IN_PAST": "Workshop liegt in der Vergangenheit",

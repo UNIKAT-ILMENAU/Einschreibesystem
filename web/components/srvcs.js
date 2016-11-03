@@ -90,6 +90,8 @@ prntSvcs.factory('printer', ['$rootScope', '$compile', '$http', '$timeout', '$q'
     }
 }]);
 
+
+
 /**
  * @name restSvcs
  * @requires ngResource
