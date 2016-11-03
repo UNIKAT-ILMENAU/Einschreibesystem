@@ -20,7 +20,7 @@ vagrant ssh
 3) create User
 ```bash
 cd /var/www/
-php app/console fos:user:create
+sudo -u www-data php app/console fos:user:create
 ```
 
 Install for production
