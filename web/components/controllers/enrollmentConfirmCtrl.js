@@ -45,7 +45,7 @@ mainAppCtrls.controller('EnrollmentConfirmCtrl', ['$scope', 'Workshops', '$state
                             dismissable: false,
                             show: true,
                             title: _translations.TITLE_SUCCESS,
-                            content: _translations.ALERT_SUCCESSFULLY_ENROLLED_WORKSHOP + '\"' + $scope.workshop.title + '\"',
+                            content: _translations.ALERT_SUCCESSFULLY_ENROLLED_WORKSHOP + ' \"' + $scope.workshop.title + '\"',
                             type: 'success'
                         });
                         break;
@@ -55,7 +55,7 @@ mainAppCtrls.controller('EnrollmentConfirmCtrl', ['$scope', 'Workshops', '$state
                             dismissable: false,
                             show: true,
                             title: _translations.TITLE_SUCCESS,
-                            content: value.message + '\"' + $scope.workshop.title + '\"',
+                            content: value.message + ' \"' + $scope.workshop.title + '\"',
                             type: 'success'
                         });
                         break;
