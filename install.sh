@@ -52,6 +52,13 @@ apt-get -y install mysql-server >> /var/www/vmbuild.log 2>&1
 sed -i "s/^bind-address/#bind-address/" /etc/mysql/my.cnf
 mysql -u root -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION; FLUSH PRIVILEGES;" 2>&1
 
+# MailHog
+echo "--- Setting up mailhog ---"
+wget https://github.com/mailhog/MailHog/releases/download/v0.2.1/MailHog_linux_amd64 -O /root/MailHog >> /var/www/vmbuild.log 2>&1
+chmod +x /root/MailHog
+cp /var/www/mailhog.conf /etc/init/mailhog.conf
+initctl start mailhog >> /var/www/vmbuild.log 2>&1
+
 # File Setup
 rm -rf html
 

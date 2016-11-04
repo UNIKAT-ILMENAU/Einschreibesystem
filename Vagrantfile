@@ -27,9 +27,9 @@ Vagrant.configure(2) do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   config.vm.network :private_network, ip: "10.10.10.10"
-  config.vm.network :forwarded_port, guest: 3306, host: 3306
   config.vm.network :forwarded_port, guest: 80, host: 8080
-  
+  config.vm.network :forwarded_port, guest: 8025, host: 8081
+
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
@@ -49,4 +49,6 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision :shell, :path => "install.sh"
+
+  config.vm.post_up_message = "Web on :8080, Mailcatcher on :8081"
 end
